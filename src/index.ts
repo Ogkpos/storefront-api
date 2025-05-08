@@ -9,6 +9,7 @@ const start = async () => {
     throw new Error("Please provide a valid Database URL");
   }
   app.listen(port, () => {
+    console.log("Connected to hosted db");
     console.log(`Server running on ${port}`);
   });
 };
