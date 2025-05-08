@@ -4,7 +4,9 @@
   "description": "A RESTful API for an inventory management system",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn src/index.ts"
+    "start": "ts-node-dev --respawn src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "prod": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
