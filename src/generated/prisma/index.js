@@ -170,6 +170,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -196,8 +200,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Role {\n  admin\n  customer\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  email     String   @unique\n  password  String\n  role      Role     @default(customer)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  products Product[]\n}\n\nmodel Category {\n  id          String   @id @default(uuid())\n  name        String\n  slug        String   @unique\n  description String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  products Product[]\n}\n\nmodel Product {\n  id          String   @id @default(uuid())\n  name        String\n  slug        String   @unique\n  description String?\n  price       Float\n  stock       Int      @default(0)\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  categoryId  String\n  userId      String\n\n  category Category @relation(fields: [categoryId], references: [id])\n  user     User     @relation(fields: [userId], references: [id])\n}\n",
-  "inlineSchemaHash": "6951c23eed88b53b3eac693dd5d8740bd6268d3bc28f5bd709af66582de3e3b4",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../src/generated/prisma\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Role {\n  admin\n  customer\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  email     String   @unique\n  password  String\n  role      Role     @default(customer)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  products Product[]\n}\n\nmodel Category {\n  id          String   @id @default(uuid())\n  name        String\n  slug        String   @unique\n  description String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  products Product[]\n}\n\nmodel Product {\n  id          String   @id @default(uuid())\n  name        String\n  slug        String   @unique\n  description String?\n  price       Float\n  stock       Int      @default(0)\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  categoryId  String\n  userId      String\n\n  category Category @relation(fields: [categoryId], references: [id])\n  user     User     @relation(fields: [userId], references: [id])\n}\n",
+  "inlineSchemaHash": "a2adf37155614096d322c1b0e8a3ab1c406c23c7e2e457b56dfb35e903a54183",
   "copyEngine": true
 }
 
@@ -238,6 +242,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "src/generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "src/generated/prisma/schema.prisma")
